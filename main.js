@@ -13,7 +13,11 @@ const jsMemoryH2 = document.querySelector('#jsMemory');
 const platform = navigator.platform;
 const vendor = navigator.vendor;
 const productSub = navigator.productSub;
-const jsMemory = window.performance.memory.jsHeapSizeLimit;
+let jsMemory = '';
+
+try {
+  jsMemory = window.performance.memory.jsHeapSizeLimit;
+} catch {}
 
 h1.textContent = 'Platform: ' + platform;
 platformH2.textContent = 'GPU info: ' + GPUInfo;
