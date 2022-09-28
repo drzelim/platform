@@ -9,10 +9,12 @@ const platformH2 = document.querySelector('#platform');
 const vendorH2 = document.querySelector('#vendor');
 const productSubH2 = document.querySelector('#productSub');
 const jsMemoryH2 = document.querySelector('#jsMemory');
+const oscpuH2 = document.querySelector('#oscpu');
 
-const platform = navigator.platform;
+const platform = navigator.platform;y
 const vendor = navigator.vendor;
 const productSub = navigator.productSub;
+const oscpu = navigator.oscpu;
 let jsMemory = '';
 
 try {
@@ -24,3 +26,12 @@ platformH2.textContent = 'GPU info: ' + GPUInfo;
 vendorH2.textContent = 'Vendor: ' + vendor;
 productSubH2.textContent = 'ProductSub: ' + productSub;
 jsMemoryH2.textContent = 'jsMemory: ' + jsMemory;
+oscpuH2.textContent = 'jsMemory: ' + oscpu;
+
+// 2172649472
+// 4294705152
+// 3760000000
+// 2190000000
+
+// 1136000000 - Mobile
+//
