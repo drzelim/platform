@@ -10,11 +10,13 @@ const vendorH2 = document.querySelector('#vendor');
 const productSubH2 = document.querySelector('#productSub');
 const jsMemoryH2 = document.querySelector('#jsMemory');
 const oscpuH2 = document.querySelector('#oscpu');
+const pluginsH2 = document.querySelector('#plugins');
 
 const platform = navigator.platform;
 const vendor = navigator.vendor;
 const productSub = navigator.productSub;
 const oscpu = navigator.oscpu;
+const plugins = navigator.plugins;
 let jsMemory = '';
 
 try {
@@ -27,6 +29,7 @@ vendorH2.textContent = 'Vendor: ' + vendor;
 productSubH2.textContent = 'ProductSub: ' + productSub;
 jsMemoryH2.textContent = 'jsMemory: ' + jsMemory;
 oscpuH2.textContent = 'oscpu: ' + oscpu;
+pluginsH2.textContent = 'oscpu: ' + plugins;
 
 // 2172649472
 // 4294705152
