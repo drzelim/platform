@@ -11,7 +11,7 @@ const productSubH2 = document.querySelector('#productSub');
 const jsMemoryH2 = document.querySelector('#jsMemory');
 const oscpuH2 = document.querySelector('#oscpu');
 
-const platform = navigator.platform;y
+const platform = navigator.platform;
 const vendor = navigator.vendor;
 const productSub = navigator.productSub;
 const oscpu = navigator.oscpu;
@@ -26,7 +26,7 @@ platformH2.textContent = 'GPU info: ' + GPUInfo;
 vendorH2.textContent = 'Vendor: ' + vendor;
 productSubH2.textContent = 'ProductSub: ' + productSub;
 jsMemoryH2.textContent = 'jsMemory: ' + jsMemory;
-oscpuH2.textContent = 'jsMemory: ' + oscpu;
+oscpuH2.textContent = 'oscpu: ' + oscpu;
 
 // 2172649472
 // 4294705152
