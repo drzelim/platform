@@ -14,6 +14,7 @@ const pluginsH2 = document.querySelector('#plugins');
 const errorH2 = document.querySelector('#error');
 const batteryH2 = document.querySelector('#battery');
 const hiddenH2 = document.querySelector('#hidden');
+const coresH2 = document.querySelector('#cores');
 
 const platform = navigator.platform;
 const vendor = navigator.vendor;
@@ -51,6 +52,7 @@ oscpuH2.textContent = 'oscpu: ' + oscpu;
 pluginsH2.textContent = 'oscpu: ' + plugins;
 batteryH2.textContent = 'battery: ' + battery;
 hiddenH2.textContent = 'hiddenFunc: ' + getHiddenFunc(document);
+coresH2.textContent = 'Cores: ' + navigator.hardwareConcurrency;
 
 
 const originalFunction = HTMLElement.offsetWidth;
