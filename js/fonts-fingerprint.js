@@ -154,8 +154,11 @@ function getFonts() {
     var detected = false;
     for (var i = 0; i < baseFonts.length; i++) {
       detected =
-        fontSpans[i].offsetWidth !== defaultWidth[baseFonts[i]] || fontSpans[i].offsetHeight !== defaultHeight[baseFonts[i]];
+        fontSpans[i].offsetWidth != defaultWidth[baseFonts[i]] || fontSpans[i].offsetHeight != defaultHeight[baseFonts[i]];
       if (detected) {
+        const h3 = document.createElement('h3');
+        h3.textContent = `offsetWidth: ${fontSpans[i].offsetWidth}      defaultWidth: ${defaultWidth[baseFonts[i]]}`
+        document.body.appendChild(h3)
         return detected;
       }
     }
@@ -180,7 +183,6 @@ function getFonts() {
   return available;
 }
 const available = getFonts();
-console.log(available);
 
 
 function GetFontsCanvas() {
@@ -297,7 +299,6 @@ function GetFontsCanvas() {
 }
 
 const result = GetFontsCanvas();
-console.log(result);
 
 const originalFontFaceSetFunction = document.fonts.check;
     document.fonts.check = function(arg) {
@@ -397,7 +398,6 @@ function GetFontsFontFaceSet() {
 }
 
 const fonstFonrFaceSet = GetFontsFontFaceSet();
-console.log(fonstFonrFaceSet);
 
 const fonts1 = document.querySelector('#fonts1');
 const fonts2 = document.querySelector('#fonts2');

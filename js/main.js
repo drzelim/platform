@@ -1,0 +1,278 @@
+import './fonts-fingerprint.js'
+import './canvas-fp.js'
+
+const container = document.querySelector('.container');
+
+const canvas = document.createElement("canvas");
+const ctx =
+  canvas.getContext("webgl2") ||
+  canvas.getContext("experimental-webgl2") ||
+  canvas.getContext("webgl") ||
+  canvas.getContext("experimental-webgl") ||
+  canvas.getContext("moz-webgl");
+const renderer = ctx.getExtension("WEBGL_debug_renderer_info");
+let GPUInfo = null;
+renderer ? (GPUInfo = ctx.getParameter(renderer.UNMASKED_RENDERER_WEBGL)) : "";
+
+
+const h1 = document.querySelector("h1");
+const useragentH2 = document.querySelector("#user-agent");
+const platformH2 = document.querySelector("#platform");
+const vendorH2 = document.querySelector("#vendor");
+const productSubH2 = document.querySelector("#productSub");
+const jsMemoryH2 = document.querySelector("#jsMemory");
+const oscpuH2 = document.querySelector("#oscpu");
+const pluginsH2 = document.querySelector("#plugins");
+const errorH2 = document.querySelector("#error");
+const batteryH2 = document.querySelector("#battery");
+const hiddenH2 = document.querySelector("#hidden");
+const coresH2 = document.querySelector("#cores");
+const deviceMemoryH2 = document.querySelector("#device-memory");
+const fullscreenH2 = document.querySelector("#fullscreen");
+const doNotTrackH2 = document.querySelector("#doNotTrack");
+
+function getHiddenFunc(d) {
+  try {
+    if (d.webkitHidden != undefined) return "webkitHidden";
+    if (d.msHidden != undefined) return "msHidden";
+    if (d.mozHidden != undefined) return "mozHidden";
+    else return "n/a";
+  } catch (_a) {
+    return "n/a";
+  }
+}
+
+let jsMemory = "";
+try {
+  jsMemory = window.performance.memory.jsHeapSizeLimit;
+} catch {}
+
+const createElementsInArray = (arr, name) => {
+  const h2Arr = [];
+
+  Array.from(arr).forEach((elem, index) => {
+    const h2 = document.createElement('h2')
+    h2.textContent = `${name} ${index + 1} ${elem.name}`
+    h2Arr.push(h2);
+  });
+  document.querySelector(`.${name}`).append(...h2Arr);
+}
+const d = document;
+delete window.navigator.getBattery;
+Reflect.deleteProperty(navigator, 'getBattery');
+
+h1.textContent = "Platform: " + navigator.platform;
+useragentH2.textContent = "User agent: " + navigator.userAgent;
+platformH2.textContent = "GPU info: " + GPUInfo;
+vendorH2.textContent = "Vendor: " + navigator.vendor;
+productSubH2.textContent = "ProductSub: " + navigator.productSub;
+jsMemoryH2.textContent = "jsMemory: " + jsMemory;
+oscpuH2.textContent = "oscpu: " + navigator.oscpu;
+pluginsH2.textContent = "plugins: " + navigator.plugins + ' ' + navigator.plugins.length;
+createElementsInArray(navigator.plugins, 'plugins')
+batteryH2.textContent = "battery: " + navigator.getBattery;
+hiddenH2.textContent = "hiddenFunc: " + getHiddenFunc(document);
+coresH2.textContent = "Cores: " + navigator.hardwareConcurrency;
+deviceMemoryH2.textContent = "Device memory: " + navigator.deviceMemory;
+doNotTrackH2.textContent = "doNotTrackH2: " + navigator.doNotTrack + ' ' + navigator.msDoNotTrack;
+fullscreenH2.textContent = "fullscreenH2: " + !!(d.mozCancelFullScreen || d.mozFullScreen || d.mozFullScreenElement || d.mozFullScreenEnabled || d.mozSetImageElement);
+
+
+let touchEvent;
+try {
+  const obj = document.createEvent('TouchEvent');
+  touchEvent = true;
+} catch (_) {
+  touchEvent = false
+}
+
+
+const wnd = window;
+const nav = navigator;
+const bs = document.body.style;
+
+const arr = [
+  'window.navigator.buildID',
+  '"getBattery"in navigator',
+  '"hasFocus"in document ? document.hasFocus() ? true : false : undefined',
+  '!!(window.mozRTCIceCandidate || window.mozRTCPeerConnection || window.mozRTCSessionDescription)',
+  '("mozInnerScreenX"in wnd) && ("mozInnerScreenY"in wnd)',
+  '!!wnd.openDatabase',
+  '!!("webkitRequestFileSystem"in wnd)',
+  '!!(d.mozCancelFullScreen || d.mozFullScreen || d.mozFullScreenElement || d.mozFullScreenEnabled || d.mozSetImageElement)',
+  '!!(wnd.callPhantom || wnd._phantom)',
+  'wnd.Buffer !== undefined',
+  'wnd.emit !== undefined',
+  'wnd.spawn !== undefined',
+  'wnd.domAutomation !== undefined || wnd.domAutomationController !== undefined',
+  'wnd.navigator.onLine',
+  '(nav.clipboard != null) && (nav.clipboard != undefined)',
+  '(wnd.locationbar && wnd.locationbar.visible) || wnd.locationbar != undefined',
+  '!!(wnd.performance && "function" == typeof performance.now)',
+  '!!(window.top === window.self)',
+  'nav.sendBeacon ? true : false',
+  '!!(nav.cookieEnabled)',
+  'nav.mediaDevices && nav.mediaDevices.getUserMedia ? 2 : nav.getUserMedia ? 1 : 0',
+  'nav.mediaDevices',
+  'nav.getUserMedia',
+  'Error.stackTraceLimit',
+  'Error.captureStackTrace',
+  'typeof console !== "undefined" && typeof console.warn !== "undefined"',
+  'window.screen.colorDepth',
+  'navigator.maxTouchPoints',
+  '"ontouchstart" in window',
+  'nav.msDoNotTrack',
+  'nav.doNotTrack',
+  'wnd.Intl.DateTimeFormat().resolvedOptions().timeZone',
+  'new Date().getTimezoneOffset()',
+  'navigator.webdriver',
+  '"msTransform" in document.body.style',
+  '"MozTransform" in bs && "MozColumnCount" in bs && "MozBorderImage" in bs && "MozColumnGap" in bs',
+  '"OTransform" in bs',
+  'touchEvent',
+  'document.createEventObject',
+  'Error.prototype.stack',
+  'window.devicePixelRatio',
+  '!!window.sessionStorage',
+  '!!window.localStorage',
+  '!!window.indexedDB',
+  'window.MediaStreamTrack',
+  'window.MediaStreamTrack.getSources',
+  '!!RTCPeerConnection',
+  '!!RTCDataChannel',
+  '"userAgentData" in window.navigator',
+  'navigator.appVersion',
+  'navigator.appCodeName',
+  'navigator.appName',
+  'navigator.vendorSub',
+  '!!("ActiveXObject" in window)'
+];
+
+
+
+arr.forEach(item => {
+  const h2 = document.createElement('h2');
+  h2.textContent = item.toString() + ' === ' + eval(item);
+  container.appendChild(h2);
+});
+
+
+async function register() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('message', (evt) => {
+      console.log(navigator.userAgent);
+      console.log(evt.data);
+    });
+
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage('give me ua');
+    } else {
+      let reistration = await navigator.serviceWorker.register('./sw.js');
+      await navigator.serviceWorker.ready;
+      reistration.active.postMessage('give me ua');
+    }
+  }
+}
+
+// await register()
+
+// Object.defineProperty(HTMLIFrameElement.prototype, 'contentWindow', {get: () => window});
+
+
+const iframe = document.createElement('iframe');
+iframe.style.display = 'none';
+iframe.style.width = '1px';
+iframe.style.height = '1px';
+iframe.style.display = 'hidden';
+
+
+const frames = Array.from(document.querySelectorAll('iframe'));
+console.log(frames);
+frames.length && console.log(frames[0].contentWindow.screen);
+
+const schooll = document.querySelector('#schooll');
+// console.log(schooll.contentWindow.screen.width);
+
+async function getMedia() {
+  let stream = null;
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch(err) {
+    console.log(err);
+  }
+  console.log(stream);
+}
+
+void 0 === navigator.mediaDevices && (navigator.mediaDevices = {});
+void 0 === navigator.mediaDevices.getUserMedia && (navigator.mediaDevices.getUserMedia = function(b) {
+    var a = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    return a ? new Promise(function(c, d) {
+        a.call(navigator, b, c, d)
+      }
+    ) : Promise.reject(Error("polyfillReject"))
+  }
+);
+
+try {
+  if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices)
+  try {
+    navigator.mediaDevices
+      .enumerateDevices()
+      .then(function (e) {
+        navigator.mediaDevices.enumerateDevices().then(function (e) {
+          const arr = Array.from(e);
+          console.log(arr);
+          arr.forEach((item) => {
+            const h2 = document.createElement("h2");
+            h2.textContent = item.kind;
+            container.appendChild(h2);
+          });
+        });
+      })
+      .catch(function () {
+        throw 1;
+      });
+  } catch (e) {
+    console.log(e);
+  }
+else if (window.MediaStreamTrack && window.MediaStreamTrack.getSources)
+  try {
+    MediaStreamTrack.getSources(function (e) {
+      navigator.mediaDevices.enumerateDevices().then(function (e) {
+        const arr = Array.from(e);
+        arr.forEach((item) => {
+          const h2 = document.createElement("h2");
+          h2.textContent = item.kind;
+          container.appendChild(h2);
+        });
+      });
+    });
+  } catch (e) {
+    console.log(e);
+  }
+} catch {
+
+}
+
+const mediaQueries = "prefers-reduced-motion;prefers-reduced-transparency;prefers-color-scheme: dark;prefers-color-scheme: light;pointer: none;pointer: coarse;pointer: fine;any-pointer: none;any-pointer: coarse;any-pointer: fine;scan: interlace;scan: progressive;color-gamut: srgb;color-gamut: p3;color-gamut: rec2020;update: fast;update: slow;update: none;grid: 0;grid: 2;hover: hover;inverted-colors: inverted;inverted-colors: none".split(';')
+
+mediaQueries.forEach(mediaQuery => {
+  const h2 = document.createElement('h2');
+  h2.textContent = mediaQuery.toString() + ' === ' + window.matchMedia(`(${mediaQuery})`).matches;
+  container.appendChild(h2);
+});
+
+
+const medias = "video/ogg video/mp4 video/webm audio/x-aiff audio/x-m4a audio/mpeg audio/aac audio/wav audio/ogg audio/mp4".split(" ");
+const codecs = "theora vorbis 1 avc1.4D401E mp4a.40.2 vp8.0 mp4a.40.5".split(" ");
+let obj = document.createElement('video');
+medias.forEach(item => {
+  codecs.forEach((codec, index,) => {
+    const h2 = document.createElement('h2');
+    let obj = document.createElement('video');
+    h2.textContent = item.toString() + ' ' + codec + ' === ' + obj.canPlayType(item + '; codecs=' + `"${codec}"`);
+    // console.log(item + '; codecs=' + codec);
+    container.appendChild(h2);
+  })
+})

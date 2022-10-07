@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,14 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<h1>Your info</h1>
 <body style="margin: 50px; text-align: center">
+  <div class="container">
     <h1></h1>
+    <h2 id="user-agent"></h2>
     <h2 id="platform"></h2>
     <h2 id="vendor"></h2>
     <h2 id="productSub"></h2>
     <h2 id="jsMemory"></h2>
     <h2 id="oscpu"></h2>
-    <h2 id="plugins"></h2>
+    <div class="plugins">
+      <h2 id="plugins"></h2>
+    </div>
     <h2 id="error"></h2>
     <h2 id="battery"></h2>
     <h2 id="hidden"></h2>
@@ -23,8 +28,46 @@
     <h2 id="fonts1"></h2>
     <h2 id="fonts2"></h2>
     <h2 id="fonts3"></h2>
-    <canvas id="TestCanvas"></canvas>
+    <h2 id="fullscreen"></h2>
+    <h2 id="doNotTrack"></h2>
+  </div>
+  <canvas id="TestCanvas"></canvas>
 
-<script type="module" src="main.js"></script>
+
+    <!-- <iframe width="560"
+      height="315"
+      src="https://www.youtube.com/embed/S2g0Bmy9kdk"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe> -->
+
+    <!-- <iframe id="schooll" style="display: block; margin: 30px auto;" src="http://www.school14.h1n.ru/" width="500" height="500" name="theFrame">
+      <h2>;dfddf</h2>
+      <script>
+        async function register() {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', (evt) => {
+
+              console.log(navigator.userAgent);
+              console.log(evt.data);
+            });
+
+            if (navigator.serviceWorker.controller) {
+              navigator.serviceWorker.controller.postMessage('give me ua');
+            } else {
+              let reistration = await navigator.serviceWorker.register('./sw.js');
+              await navigator.serviceWorker.ready;
+              reistration.active.postMessage('give me ua');
+            }
+          }
+        }
+        await register()
+      </script>
+    </iframe> -->
+
+
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
