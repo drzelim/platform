@@ -27,7 +27,7 @@ const myFonts = [
   "Times New Roman PS",
   "Wingdings",
   "Wingdings 2",
-  "Wingdings 3"
+  "Wingdings 3",
 ]
 
 function getFonts() {
@@ -156,9 +156,9 @@ function getFonts() {
       detected =
         fontSpans[i].offsetWidth != defaultWidth[baseFonts[i]] || fontSpans[i].offsetHeight != defaultHeight[baseFonts[i]];
       if (detected) {
-        const h3 = document.createElement('h3');
-        h3.textContent = `offsetWidth: ${fontSpans[i].offsetWidth}      defaultWidth: ${defaultWidth[baseFonts[i]]}`
-        document.body.appendChild(h3)
+        // const h3 = document.createElement('h3');
+        // h3.textContent = `offsetWidth: ${fontSpans[i].offsetWidth}      defaultWidth: ${defaultWidth[baseFonts[i]]}`
+        // document.body.appendChild(h3)
         return detected;
       }
     }
@@ -386,7 +386,6 @@ function GetFontsFontFaceSet() {
     fontList.forEach(function (Font) {
       if (document.fonts.check('10px "' + Font + '"')) Result.push(Font);
     });
-    // console.log(Date.now() - TimeStart);
 
     if (Result.length > fontList.length - 5) {
       return [];

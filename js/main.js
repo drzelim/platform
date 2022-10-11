@@ -31,6 +31,22 @@ const deviceMemoryH2 = document.querySelector("#device-memory");
 const fullscreenH2 = document.querySelector("#fullscreen");
 const doNotTrackH2 = document.querySelector("#doNotTrack");
 
+const errFirefoxFunc = () => {
+  var errFirefox;
+  try {
+    throw "a";
+  } catch (err) {
+    try {
+      console.log(err);
+      err.toSource();
+      errFirefox = true;
+    } catch (errOfErr) {
+      errFirefox = false;
+    }
+  }
+  return errFirefox;
+};
+
 function getHiddenFunc(d) {
   try {
     if (d.webkitHidden != undefined) return "webkitHidden";
@@ -145,14 +161,45 @@ const arr = [
   'navigator.appCodeName',
   'navigator.appName',
   'navigator.vendorSub',
-  '!!("ActiveXObject" in window)'
+  '!!("ActiveXObject" in window)',
+  '"chrome" in window',
+  'window.performance.getEntriesByType',
+  'screen.mozOrientation',
+  '"MozAppearance" in document.documentElement.style',
+  'document.documentElement.style.MozAppearance',
+  'Element.prototype.mozMatchesSelector',
+  'container.matches(".container")',
+  'container.webkitMatchesSelector(".container")',
+  'container.mozMatchesSelector(".container")',
+  'container.msMatchesSelector(".container")',
+  'container.oMatchesSelector(".container")',
+  'navigator.javaEnabled()',
+  'navigator.userLanguage',
+  'navigator.browserLanguage',
+  'navigator.systemLanguage',
+  'navigator.connection',
+  'InstallTrigger',
+  'Array.prototype.map.toString().length',
+  'Array.prototype.flatMap.toString().length',
+  'Array.prototype.some.toString().length',
+  'Array.prototype.reverse.toString().length',
+  'Array.prototype.slice.toString().length',
+  'Array.prototype.sort.toString().length',
+  'Array.prototype.indexOf.toString().length',
+  'Array.prototype.join.toString().length',
+  'Array.prototype.reduce.toString().length',
+  'Array.prototype.every.toString().length',
+  'document.mozCancelFullScreen',
+  'errFirefoxFunc()'
 ];
-
-
 
 arr.forEach(item => {
   const h2 = document.createElement('h2');
-  h2.textContent = item.toString() + ' === ' + eval(item);
+  try {
+    h2.textContent = item.toString() + ' === ' + eval(item);
+  } catch {
+    h2.textContent = item.toString() + ' === Error'
+  }
   container.appendChild(h2);
 });
 
@@ -257,22 +304,22 @@ else if (window.MediaStreamTrack && window.MediaStreamTrack.getSources)
 
 const mediaQueries = "prefers-reduced-motion;prefers-reduced-transparency;prefers-color-scheme: dark;prefers-color-scheme: light;pointer: none;pointer: coarse;pointer: fine;any-pointer: none;any-pointer: coarse;any-pointer: fine;scan: interlace;scan: progressive;color-gamut: srgb;color-gamut: p3;color-gamut: rec2020;update: fast;update: slow;update: none;grid: 0;grid: 2;hover: hover;inverted-colors: inverted;inverted-colors: none".split(';')
 
-mediaQueries.forEach(mediaQuery => {
-  const h2 = document.createElement('h2');
-  h2.textContent = mediaQuery.toString() + ' === ' + window.matchMedia(`(${mediaQuery})`).matches;
-  container.appendChild(h2);
-});
+// mediaQueries.forEach(mediaQuery => {
+//   const h2 = document.createElement('h2');
+//   h2.textContent = mediaQuery.toString() + ' === ' + window.matchMedia(`(${mediaQuery})`).matches;
+//   container.appendChild(h2);
+// });
 
 
 const medias = "video/ogg video/mp4 video/webm audio/x-aiff audio/x-m4a audio/mpeg audio/aac audio/wav audio/ogg audio/mp4".split(" ");
 const codecs = "theora vorbis 1 avc1.4D401E mp4a.40.2 vp8.0 mp4a.40.5".split(" ");
 let obj = document.createElement('video');
-medias.forEach(item => {
-  codecs.forEach((codec, index,) => {
-    const h2 = document.createElement('h2');
-    let obj = document.createElement('video');
-    h2.textContent = item.toString() + ' ' + codec + ' === ' + obj.canPlayType(item + '; codecs=' + `"${codec}"`);
-    // console.log(item + '; codecs=' + codec);
-    container.appendChild(h2);
-  })
-})
+// medias.forEach(item => {
+//   codecs.forEach((codec, index,) => {
+//     const h2 = document.createElement('h2');
+//     let obj = document.createElement('video');
+//     h2.textContent = item.toString() + ' ' + codec + ' === ' + obj.canPlayType(item + '; codecs=' + `"${codec}"`);
+//     // console.log(item + '; codecs=' + codec);
+//     container.appendChild(h2);
+//   })
+// })
