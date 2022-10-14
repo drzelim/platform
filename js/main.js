@@ -4,19 +4,24 @@ import './canvas-fp.js'
 const container = document.querySelector('.container');
 
 let GPUInfo = null;
-
+let vendor = null;
 try {
   const canvas = document.createElement("canvas");
   const ctx =
     canvas.getContext("webgl2") ||
     canvas.getContext("experimental-webgl2") ||
     canvas.getContext("webgl") ||
-    canvas.getContext("experimental-webgl") ||
-    canvas.getContext("moz-webgl");
-  const renderer = ctx.getExtension("WEBGL_debug_renderer_info");
-  renderer ? (GPUInfo = ctx.getParameter(renderer.UNMASKED_RENDERER_WEBGL)) : "";
-} catch {
+    canvas.getContext("experimental-webgl")
+    || canvas.getContext("moz-webgl");
 
+  console.log("ctx", ctx);
+  const renderer = ctx.getExtension("WEBGL_debug_renderer_info");
+  console.log(renderer);
+
+  renderer ? (GPUInfo = ctx.getParameter(renderer.UNMASKED_RENDERER_WEBGL)) : "";
+  renderer ? vendor = ctx.getParameter(renderer.UNMASKED_VENDOR_WEBGL) : "";
+} catch (err){
+  console.log(err);
 }
 
 
@@ -84,7 +89,7 @@ Reflect.deleteProperty(navigator, 'getBattery');
 
 h1.textContent = "Platform: " + navigator.platform;
 useragentH2.textContent = "User agent: " + navigator.userAgent;
-platformH2.textContent = "GPU info: " + GPUInfo;
+platformH2.textContent = "GPU info: " + vendor + ' ' + GPUInfo;
 vendorH2.textContent = "Vendor: " + navigator.vendor;
 productSubH2.textContent = "ProductSub: " + navigator.productSub;
 jsMemoryH2.textContent = "jsMemory: " + jsMemory;
@@ -111,6 +116,7 @@ try {
 const wnd = window;
 const nav = navigator;
 const bs = document.body.style;
+
 
 const arr = [
   'window.navigator.buildID',
@@ -195,7 +201,9 @@ const arr = [
   'Array.prototype.reduce.toString().length',
   'Array.prototype.every.toString().length',
   'document.mozCancelFullScreen',
-  'errFirefoxFunc()'
+  'errFirefoxFunc()',
+  'document.body.addBehavior',
+  'navigator.language'
 ];
 
 arr.forEach(item => {
@@ -229,7 +237,6 @@ async function register() {
 // await register()
 
 // Object.defineProperty(HTMLIFrameElement.prototype, 'contentWindow', {get: () => window});
-
 
 const iframe = document.createElement('iframe');
 iframe.style.display = 'none';
