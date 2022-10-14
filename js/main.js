@@ -203,7 +203,9 @@ const arr = [
   'document.mozCancelFullScreen',
   'errFirefoxFunc()',
   'document.body.addBehavior',
-  'navigator.language'
+  'navigator.language',
+  'nav.plugins != null && nav.plugins != undefined',
+  'nav.plugins.length'
 ];
 
 arr.forEach(item => {
