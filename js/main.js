@@ -204,6 +204,7 @@ const arr = [
   'errFirefoxFunc()',
   'document.body.addBehavior',
   'navigator.language',
+  'navigator.languages',
   'nav.plugins != null && nav.plugins != undefined',
   'nav.plugins.length'
 ];
