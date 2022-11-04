@@ -177,6 +177,7 @@ const arr = [
   '"chrome" in window',
   'window.performance.getEntriesByType',
   'screen.mozOrientation',
+  'window.screen.orientation',
   'window.screen.orientation.type',
   '"MozAppearance" in document.documentElement.style',
   'document.documentElement.style.MozAppearance',
