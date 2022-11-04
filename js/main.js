@@ -89,7 +89,7 @@ Reflect.deleteProperty(navigator, 'getBattery');
 
 h1.textContent = "Platform: " + navigator.platform;
 useragentH2.textContent = "User agent: " + navigator.userAgent;
-platformH2.textContent = "GPU info: " + vendor + ' ' + GPUInfo;
+platformH2.textContent = "GPU info: " + vendor + ' ~ ' + GPUInfo;
 vendorH2.textContent = "Vendor: " + navigator.vendor;
 productSubH2.textContent = "ProductSub: " + navigator.productSub;
 jsMemoryH2.textContent = "jsMemory: " + jsMemory;
@@ -116,7 +116,8 @@ try {
 const wnd = window;
 const nav = navigator;
 const bs = document.body.style;
-
+var firstLanguages = navigator.languages[0].substr(0, 2);
+console.log(firstLanguages !== navigator.language.substr(0, 2));
 
 const arr = [
   'window.navigator.buildID',
@@ -176,6 +177,7 @@ const arr = [
   '"chrome" in window',
   'window.performance.getEntriesByType',
   'screen.mozOrientation',
+  'window.screen.orientation.type',
   '"MozAppearance" in document.documentElement.style',
   'document.documentElement.style.MozAppearance',
   'Element.prototype.mozMatchesSelector',
@@ -206,7 +208,11 @@ const arr = [
   'navigator.language',
   'navigator.languages',
   'nav.plugins != null && nav.plugins != undefined',
-  'nav.plugins.length'
+  'nav.plugins.length',
+  'firstLanguages',
+  'navigator.language.substr(0, 2)',
+  'firstLanguages !== navigator.language.substr(0, 2)',
+  'window.performance'
 ];
 
 arr.forEach(item => {
