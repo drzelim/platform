@@ -2,7 +2,7 @@ const options = {
   dontUseFakeFontInCanvas: true
 }
 
-const getCanvasFp = function (options) {
+export const getCanvasFp = function (options) {
   var result = []
   var canvas = document.createElement('canvas')
   canvas.width = 2000
@@ -51,4 +51,4 @@ const getCanvasFp = function (options) {
   return result
 }
 
-console.log(getCanvasFp(options));
+export const fpCanvas = getCanvasFp(options);
