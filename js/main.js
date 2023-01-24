@@ -1,5 +1,5 @@
 import './fonts-fingerprint.js';
-import {fpCanvas} from './canvas-fp.js';
+import {fpCanvas} from './canvas-fp-yandex.js';
 
 var RTCPeerConnection = /*window.RTCPeerConnection ||*/ window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
 
