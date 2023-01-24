@@ -1,5 +1,4 @@
 import './fonts-fingerprint.js';
-import {fpCanvas} from './canvas-fp-yandex.js';
 
 var RTCPeerConnection = /*window.RTCPeerConnection ||*/ window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
 
@@ -263,7 +262,6 @@ const arr = [
   'firstLanguages !== navigator.language.substr(0, 2)',
   'window.performance',
   'navigator.getGamepads',
-  'fpCanvas'
 ];
 
 arr.forEach(item => {
