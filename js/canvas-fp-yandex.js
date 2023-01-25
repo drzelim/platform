@@ -11,7 +11,7 @@ export const getCanvasFp = function (options) {
   var ctx = canvas.getContext('2d')
   ctx.rect(0, 0, 10, 10)
   ctx.rect(2, 2, 6, 6)
-  result.push('canvas winding:' + ((ctx.isPointInPath(5, 5, 'evenodd') === false) ? 'yes' : 'no'))
+  // result.push('canvas winding:' + ((ctx.isPointInPath(5, 5, 'evenodd') === false) ? 'yes' : 'no'))
   ctx.textBaseline = 'alphabetic'
   ctx.fillStyle = '#f60'
   ctx.fillRect(125, 1, 62, 20)

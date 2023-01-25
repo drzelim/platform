@@ -1,3 +1,5 @@
+import {fpCanvas} from "./canvas-fp-yandex.js";
+
 const container = document.querySelector('.container');
 
 const obj = {
@@ -5,6 +7,7 @@ const obj = {
   userScreenWidth: window.screen.width,
   userScreenHeight: window.screen.height,
   deviceScaleFactorNumber: window.devicePixelRatio,
+  fpCanvas
 };
 
 Object.keys(obj).forEach(key => {
