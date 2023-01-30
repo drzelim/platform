@@ -1,5 +1,5 @@
 const options = {
-  dontUseFakeFontInCanvas: true
+  dontUseFakeFontInCanvas: false
 }
 
 export const getCanvasFp = function (options) {
@@ -17,7 +17,7 @@ export const getCanvasFp = function (options) {
   ctx.fillRect(125, 1, 62, 20)
   ctx.fillStyle = '#069'
   if (options.dontUseFakeFontInCanvas) {
-    ctx.font = '11pt Arial MT'
+    ctx.font = '11pt Arial'
   } else {
     ctx.font = '11pt no-real-font-123'
   }

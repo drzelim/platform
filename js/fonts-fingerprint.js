@@ -401,6 +401,7 @@ const fonstFonrFaceSet = GetFontsFontFaceSet();
 const fonts1 = document.querySelector('#fonts1');
 const fonts2 = document.querySelector('#fonts2');
 const fonts3 = document.querySelector('#fonts3');
+console.log(available);
 fonts1.textContent = 'Fonts_1: ' +  available.length
 fonts2.textContent = 'Fonts_2: ' +  result.length
-fonts3.textContent = 'Fonts_3: ' +  result.length
+fonts3.textContent = 'Fonts_3: ' +  fonstFonrFaceSet.length
