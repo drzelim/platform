@@ -7,6 +7,8 @@ const obj = {
   userScreenWidth: window.screen.width,
   userScreenHeight: window.screen.height,
   deviceScaleFactorNumber: window.devicePixelRatio,
+  language: navigator.language,
+  languages: navigator.languages,
   fpCanvas
 };
 
