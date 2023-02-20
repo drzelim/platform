@@ -283,12 +283,12 @@ arr.forEach(item => {
 //   container.appendChild(h2);
 // })
 
-navigator.userAgentData && navigator.userAgentData.getHighEntropyValues(
+navigator.userAgentData && navigator.userAgentData.getHighEntropyValues && navigator.userAgentData.getHighEntropyValues(
   ["architecture",
   "model",
   "platformVersion",
   "fullVersionList",
-  "brands", "mobile", "platform", "bitness", "uaFullVersion"])
+  "brands", "mobile", "platform", "bitness", "uaFullVersion", "wow64"])
   .then((values) => {
     Object.keys(values).forEach(key => {
      try {
