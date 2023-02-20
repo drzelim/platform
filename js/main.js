@@ -283,7 +283,7 @@ arr.forEach(item => {
 //   container.appendChild(h2);
 // })
 
-navigator.userAgentData.getHighEntropyValues(
+navigator.userAgentData && navigator.userAgentData.getHighEntropyValues(
   ["architecture",
   "model",
   "platformVersion",
@@ -291,6 +291,7 @@ navigator.userAgentData.getHighEntropyValues(
   "brands", "mobile", "platform", "bitness", "uaFullVersion"])
   .then((values) => {
     Object.keys(values).forEach(key => {
+     try {
       if (Array.isArray(values[key])) {
         values[key].forEach(item => {
           const h2 = document.createElement('h2');
@@ -302,6 +303,9 @@ navigator.userAgentData.getHighEntropyValues(
         h2.textContent = `${key}: ${values[key]}`;
         container.appendChild(h2);
       }
+     } catch {
+
+     }
 
     })
     console.log(values);
