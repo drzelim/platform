@@ -300,7 +300,7 @@ navigator.userAgentData && navigator.userAgentData.getHighEntropyValues(
         })
       } else {
         const h2 = document.createElement('h2');
-        h2.textContent = `${key}: ${values[key]}`;
+        h2.textContent = `${key}: ${typeof values[key] === undefined ? 'undefined' : values[key]}`;
         container.appendChild(h2);
       }
      } catch {
