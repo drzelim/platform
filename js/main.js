@@ -215,7 +215,6 @@ const arr = [
   'window.MediaStreamTrack.getSources',
   '!!RTCPeerConnection',
   '!!RTCDataChannel',
-  '"userAgentData" in window.navigator',
   'navigator.appVersion',
   'navigator.appCodeName',
   'navigator.appName',
@@ -262,6 +261,9 @@ const arr = [
   'firstLanguages !== navigator.language.substr(0, 2)',
   'window.performance',
   'navigator.getGamepads',
+  'navigator.userAgentData.platform',
+  'navigator.userAgentData.mobile',
+  '"userAgentData" in window.navigator',
 ];
 
 arr.forEach(item => {
@@ -273,6 +275,37 @@ arr.forEach(item => {
   }
   container.appendChild(h2);
 });
+
+// const brands = navigator.userAgentData.brands;
+// brands.forEach(item => {
+//   const h2 = document.createElement('h2');
+//   h2.textContent = `brand: ${item.brand}, version: ${item.version}`;
+//   container.appendChild(h2);
+// })
+
+navigator.userAgentData.getHighEntropyValues(
+  ["architecture",
+  "model",
+  "platformVersion",
+  "fullVersionList",
+  "brands", "mobile", "platform", "bitness", "uaFullVersion"])
+  .then((values) => {
+    Object.keys(values).forEach(key => {
+      if (Array.isArray(values[key])) {
+        values[key].forEach(item => {
+          const h2 = document.createElement('h2');
+          h2.textContent = `brand: ${item.brand}, version: ${item.version}`;
+          container.appendChild(h2);
+        })
+      } else {
+        const h2 = document.createElement('h2');
+        h2.textContent = `${key}: ${values[key]}`;
+        container.appendChild(h2);
+      }
+
+    })
+    console.log(values);
+  });
 
 
 async function register() {
