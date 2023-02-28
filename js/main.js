@@ -72,18 +72,16 @@ try {
 }
 
 function getArchitecture() {
-  const f = new Float32Array(1)
-  const u8 = new Uint8Array(f.buffer)
-  f[0] = Infinity
-  f[0] = f[0] - f[0]
+  const f = new Float32Array(1);
+  const u8 = new Uint8Array(f.buffer);
+  f[0] = Infinity;
+  f[0] = f[0] - f[0];
 
-  console.log(f)
+  console.log(f);
   console.log(u8);
 
-  return u8[3]
+  return u8[3];
 }
-
-
 
 const h1 = document.querySelector("h1");
 const useragentH2 = document.querySelector("#user-agent");
@@ -277,7 +275,8 @@ const arr = [
   'navigator.userAgentData.platform',
   'navigator.userAgentData.mobile',
   '"userAgentData" in window.navigator',
-  "getArchitecture()"
+  "getArchitecture()",
+  'Infinity - Infinity'
 ];
 
 arr.forEach(item => {
