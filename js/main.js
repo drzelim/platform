@@ -83,6 +83,37 @@ function getArchitecture() {
   return u8[3];
 }
 
+const ContrastPreference =  {
+  Less: '-1',
+  None: 0,
+  More: 1,
+  ForcedColors: 10,
+}
+
+function getContrastPreference() {
+  if (doesMatch('no-preference')) {
+    return ContrastPreference.None
+  }
+  // The sources contradict on the keywords. Probably 'high' and 'low' will never be implemented.
+  // Need to check it when all browsers implement the feature.
+  if (doesMatch('high') || doesMatch('more')) {
+    return ContrastPreference.More
+  }
+  if (doesMatch('low') || doesMatch('less')) {
+    return ContrastPreference.Less
+  }
+  if (doesMatch('forced')) {
+    return ContrastPreference.ForcedColors
+  }
+  return undefined
+}
+
+function doesMatch(value) {
+  return matchMedia(`(prefers-contrast: ${value})`).matches
+}
+
+const originalFuncUint8Array = Uint8Array.prototype;
+
 const h1 = document.querySelector("h1");
 const useragentH2 = document.querySelector("#user-agent");
 const platformH2 = document.querySelector("#platform");
@@ -276,7 +307,14 @@ const arr = [
   'navigator.userAgentData.mobile',
   '"userAgentData" in window.navigator',
   "getArchitecture()",
-  'Infinity - Infinity'
+  'Infinity - Infinity',
+  "doesMatch('no-preference')",
+  "doesMatch('high')",
+  "doesMatch('more')",
+  "doesMatch('low')",
+  "doesMatch('less')",
+  "doesMatch('forced')",
+  "getContrastPreference()"
 ];
 
 arr.forEach(item => {
