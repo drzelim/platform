@@ -143,6 +143,10 @@ function getVendorFlavors() {
   return flavors.sort()
 }
 
+function doesMatch(value) {
+  return matchMedia(`(prefers-contrast: ${value})`).matches
+}
+
 function getContrastPreference() {
   if (doesMatch('no-preference')) {
     return ContrastPreference.None
@@ -159,8 +163,19 @@ function getContrastPreference() {
   return undefined
 }
 
-function doesMatch(value) {
-  return matchMedia(`(prefers-contrast: ${value})`).matches
+
+function doesMatchReduced(value) {
+  return matchMedia(`(prefers-reduced-motion: ${value})`).matches
+}
+
+function isMotionReduced() {
+  if (doesMatchReduced('reduce')) {
+    return true
+  }
+  if (doesMatchReduced('no-preference')) {
+    return false
+  }
+  return undefined
 }
 
 const originalFuncUint8Array = Uint8Array.prototype;
@@ -258,6 +273,8 @@ const nav = navigator;
 const bs = document.body.style;
 var firstLanguages = navigator.languages[0].substr(0, 2);
 console.log(firstLanguages !== navigator.language.substr(0, 2));
+
+
 
 const arr = [
   'window.navigator.buildID',
@@ -367,7 +384,8 @@ const arr = [
   "doesMatch('forced')",
   "getContrastPreference()",
   "getVendorFlavors()",
-  "navigator.pdfViewerEnabled"
+  "navigator.pdfViewerEnabled",
+  "isMotionReduced()"
 ];
 
 arr.forEach(item => {
