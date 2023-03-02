@@ -366,7 +366,8 @@ const arr = [
   "doesMatch('less')",
   "doesMatch('forced')",
   "getContrastPreference()",
-  "getVendorFlavors()"
+  "getVendorFlavors()",
+  "navigator.pdfViewerEnabled"
 ];
 
 arr.forEach(item => {
