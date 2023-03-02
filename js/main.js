@@ -71,17 +71,36 @@ try {
   console.log(err);
 }
 
+// const originalUint8ArrayConstructor = Uint8Array;
+// Uint8Array = function(arg) {
+//   console.log(arg);
+//   let originalobj = new originalUint8ArrayConstructor(arg);
+//   if (true) {
+//     const f = new Float32Array(1);
+//     f[0] = Infinity;
+//     originalobj = new originalUint8ArrayConstructor(f.buffer)
+//   }
+//   return originalobj;
+// }
+
 function getArchitecture() {
+ try {
   const f = new Float32Array(1);
   const u8 = new Uint8Array(f.buffer);
   f[0] = Infinity;
   f[0] = f[0] - f[0];
-
   console.log(f);
   console.log(u8);
 
-  return u8[3];
+  return u8;
+
+ } catch (err) {
+  console.log(err);
+ }
+
 }
+
+
 
 const ContrastPreference =  {
   Less: '-1',
