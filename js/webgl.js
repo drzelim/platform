@@ -82,7 +82,11 @@ const getWebglFp = () => {
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, vertexPosBuffer.numItems)
   try {
     result.push(gl.canvas.toDataURL())
-  } catch (e) {
+    const img = document.createElement('img')
+    img.src = gl.canvas.toDataURL();
+    document.body.prepend(img)
+  } catch (err) {
+    console.log(err);
   }
   result.push('extensions:' + (gl.getSupportedExtensions() || []).join(';'))
   result.push('webgl aliased line width range:' + fa2s(gl.getParameter(gl.ALIASED_LINE_WIDTH_RANGE)))
