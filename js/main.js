@@ -318,6 +318,40 @@ const bs = document.body.style;
 var firstLanguages = navigator.languages[0].substr(0, 2);
 console.log(firstLanguages !== navigator.language.substr(0, 2));
 
+function r() {
+  var e = document.createElement("canvas");
+  e.width = 1,
+    e.height = 1;
+  var n = e.getContext("webgl", {
+    alpha: !1,
+    depth: !1,
+    antialias: !1
+  })
+    , t = n.createShader(n.VERTEX_SHADER);
+  n.shaderSource(t, "#version 100\nattribute vec2 p;\nvoid main() {\n    gl_Position = vec4(p,0,1);\n    gl_PointSize = 1.0;\n}"),
+    n.compileShader(t);
+  var r = n.createShader(n.FRAGMENT_SHADER);
+  n.shaderSource(r, "#version 100\nvoid main() {\n    gl_FragColor = vec4(1, 0, 0, 1);\n}"),
+    n.compileShader(r);
+  var o = n.createProgram();
+  n.attachShader(o, t),
+    n.attachShader(o, r),
+    n.bindAttribLocation(o, 0, "p"),
+    n.linkProgram(o);
+  var i = n.createBuffer();
+  n.bindBuffer(n.ARRAY_BUFFER, i),
+    n.bufferData(n.ARRAY_BUFFER, new Float32Array([0, 0]), n.STATIC_DRAW),
+    n.enableVertexAttribArray(0),
+    n.vertexAttribPointer(0, 2, n.FLOAT, !1, 0, 0),
+    n.clearColor(0, 1, 0, 1),
+    n.clear(n.COLOR_BUFFER_BIT),
+    n.useProgram(o),
+    n.drawArrays(n.POINTS, 0, 1);
+  var s = new Uint8Array(4);
+  return n.readPixels(0, 0, 1, 1, n.RGBA, n.UNSIGNED_BYTE, s),
+  255 === s[0]
+}
+
 const arr = [
   "window.navigator.buildID",
   '"getBattery"in navigator',
@@ -428,6 +462,7 @@ const arr = [
   "getVendorFlavors()",
   "navigator.pdfViewerEnabled",
   "isMotionReduced()",
+  "r()",
 ];
 
 arr.forEach((item) => {
