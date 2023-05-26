@@ -30,6 +30,70 @@ try {
     }
   }
 
+  const getConvertString = (str, pad) => pad.substring(str.toString().length) + str;
+
+  const getFakeBufferDataArray = () => {
+    const getRandomInt = (min, max) => (Math.floor(Math.random() * (max - min + 1) + min));
+    const fakeNumber1 = getConvertString(getRandomInt(1, 499), '000');
+    const fakeNumber2 = getConvertString(getRandomInt(1, 99), '00');
+    const fakeNumber3 = getConvertString(getRandomInt(1, 99), '00');
+    const fakeNumber4 = getConvertString(getRandomInt(1, 99), '00');
+    const fakeNumber5 = getConvertString(getRandomInt(1, 999), '000');
+
+    const fakeArray = [`-0.20${fakeNumber1}298023224`, `-0.900${fakeNumber2}`, 0, `0.400${fakeNumber3}`, `-0.260${fakeNumber4}`, 0, `0.000${fakeNumber5}`, `0.732134444`, 0];
+    return new Float32Array(fakeArray.map(number => parseFloat(number)));
+  }
+
+
+  const originalBufferData = WebGLRenderingContext.prototype.bufferData;
+  WebGLRenderingContext.prototype.bufferData = function(...args) {
+    const newArgs = args.map((arg) => {
+      if (typeof arg === 'object' && arg instanceof Float32Array) {
+        if (arg.byteLength === 36) {
+          // return getFakeBufferDataArray();
+        }
+      }
+      return arg;
+    })
+
+    console.log('WebGLRenderingContext', arguments);
+    return originalBufferData.apply(this, newArgs);
+  }
+
+  const editImage = (context, settings) => {
+    if (!context) return;
+    context.fillStyle = settings.fillStyle;
+    context.fill();
+    context.font = `${settings.fontSize}pt Arial`;
+    context.rotate(settings.angle);
+    context.fillText(settings.text, settings.x, settings.y);
+  };
+
+  const settings = {
+    "fillStyle": "rgba(250, 255, 252, 0.05)",
+    "fontSize": "25",
+    "renderer": "ANGLE (AMD, Radeon RX 480 Series Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "text": "SSGxrSLYKnJ",
+    "vendor": "Google Inc. (AMD)",
+    "x": "5",
+    "y": "26"
+}
+
+  const originalFunction = HTMLCanvasElement?.prototype.toDataURL;
+  HTMLCanvasElement.prototype.toDataURL = function (type) {
+    let context = this.getContext('2d');
+    editImage(context, settings);
+    context = this.getContext('webgl');
+    console.log(context);
+    console.log(context.getParameter(context.BLEND_COLOR));
+    context.blendColor(0.1, 0.5, 0,7, 1);
+    context.clearColor(0.1, 0.5, 0,7, 1);
+    console.log(context.getBufferParameter(context.ARRAY_BUFFER, context.BUFFER_SIZE));
+    const canvas = originalFunction.apply(this, arguments);
+    console.log(canvas);
+    return canvas;
+  };
+
   const getWebglFp = () => {
     var gl
     var fa2s = function (fa) {
@@ -60,7 +124,7 @@ try {
     var fShaderTemplate = 'precision mediump float;varying vec2 varyinTexCoordinate;void main() {gl_FragColor=vec4(varyinTexCoordinate,0,1);}'
     var vertexPosBuffer = gl.createBuffer()
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexPosBuffer)
-    var vertices = new Float32Array([-0.2, -0.9, 0, 0.4, -0.26, 0, 0, 0.732134444, 0])
+    var vertices = new Float32Array([-.2, -.9, 0, .4, -.26, 0, 0, .732134444, 0])
     gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
     vertexPosBuffer.itemSize = 3
     vertexPosBuffer.numItems = 3
@@ -82,9 +146,10 @@ try {
     gl.uniform2f(program.offsetUniform, 1, 1)
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, vertexPosBuffer.numItems)
     try {
-      result.push(gl.canvas.toDataURL())
+      const fp = gl.canvas.toDataURL()
+      result.push(fp)
       const img = document.createElement('img')
-      img.src = gl.canvas.toDataURL();
+      img.src = fp;
       document.body.prepend(img)
     } catch (err) {
       console.log(err);

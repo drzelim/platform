@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <item>
+      <id>1234567890</id>
+      <title>Золотое кольцо с сапфиром и бриллиантами 585</title>
+      <description>Арт 7000111 Проба 585 Золото белое Вес 4,04 гр 1 Сапфир природный обл 2,03 кт умеренно-красно-фиолетовый.VS 10 БрКр57 0,2 кт 4/4</description>
+      <link>https://juvelirnyj-lombard.ru/catalog/zolotoe-kolco-s-sapfirom-i-brilliaetami-7000111</link>
+      <image>
+        <url>https://juvelirnyj-lombard.ru/media/products/b053176423/zolotoe-kolco-s-sapfirom-i-brilliaetami.jpg</url>
+        <title>Кольцо</title>
+        <link>https://juvelirnyj-lombard.ru/catalog/zolotoe-kolco-s-sapfirom-i-brilliaetami-7000111</link>
+      </image>
+      <!-- <image_url>http://example.com/product-image.jpg</image_url> -->
+      <availability>in stock</availability>
+      <price_currency>RUB</price_currency>
+      <price>91000</price>
+      <!-- <brand>Название бренда</brand> -->
+      <mpn>7000111</mpn>
+      <!-- <gtin>Штрих-код товара</gtin> -->
+      <condition>new</condition>
+      <category>Кольцо</category>
+      <item_group_id>Артикул товарной группы</item_group_id>
+      <custom_label_0>Метка 1</custom_label_0>
+    </item>
+  </channel>
+</rss>
