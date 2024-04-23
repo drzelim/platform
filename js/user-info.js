@@ -7,7 +7,7 @@ const obj = {
   userAgent: navigator.userAgent,
   userScreenWidth: window.screen.width,
   userScreenHeight: window.screen.height,
-  innderWidth: window.innerWidth,
+  innerWidth: window.innerWidth,
   innerHeight: window.innerHeight,
   deviceScaleFactorNumber: window.devicePixelRatio,
   language: navigator.language,
