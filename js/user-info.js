@@ -1,4 +1,5 @@
-import {fpCanvas} from "./canvas-fp-yandex.js";
+// import {yandexFpCanvas} from "./canvas-fp-yandex.js";
+import {fpCanvas} from "./canvas-fp.js";
 
 const container = document.querySelector('.container');
 
@@ -6,10 +7,13 @@ const obj = {
   userAgent: navigator.userAgent,
   userScreenWidth: window.screen.width,
   userScreenHeight: window.screen.height,
+  innderWidth: window.innerWidth,
+  innerHeight: window.innerHeight,
   deviceScaleFactorNumber: window.devicePixelRatio,
   language: navigator.language,
   languages: navigator.languages,
-  fpCanvas
+  // yandexFpCanvas
+  // fpCanvas
 };
 
 Object.keys(obj).forEach(key => {
